@@ -76,6 +76,7 @@ void loop(){
           Serial.println("Input next key");
           cod[3] = keypad.waitForKey();
           Serial.println(cod[3]);
+          
                if (code[0] == cod[0] && code[1] == cod[1] && code[2] == cod[2] && code[3] == cod[3]){
                 Serial.println("Match! Opening Door!");
                 Attempt = 0;
@@ -84,7 +85,6 @@ void loop(){
                 motor();
                 //delay(5000);
                 digitalWrite(OHYEAH, LOW);
-                ledPin_state = digitalRead(ledPin);        // Remember LED state, lit or unlit.
                 }
                 
                 else{
@@ -149,13 +149,14 @@ void loop(){
           Serial.println("Input next key");
           cod[3] = keypad.waitForKey();
           Serial.println(cod[3]);
+          
                if (code[0] == cod[0] && code[1] == cod[1] && code[2] == cod[2] && code[3] == cod[3]){
                 Serial.println("Match! Resetting passcode...");
                 digitalWrite(ledPin,!digitalRead(ledPin));
                 digitalWrite(OHYEAH, HIGH);
                 delay(1000);
                 digitalWrite(OHYEAH, LOW);
-                ledPin_state = digitalRead(ledPin);        // Remember LED state, lit or unlit.
+ 
                 
                     delay(1000);
                     Serial.println("Input first key");
@@ -177,6 +178,7 @@ void loop(){
                     Serial.println("Passcode Set!");
                 
                 }
+                
                 else{
                      Serial.println("No Match!");
                      digitalWrite(WRONG, HIGH);
@@ -193,19 +195,16 @@ void loop(){
                      Attempt = Attempt + 1;
                      digitalWrite(WRONG, LOW);
                  }    
-       
-//    if (blink){
-//        digitalWrite(ledPin,!digitalRead(ledPin));    // Change the ledPin from Hi2Lo or Lo2Hi.
-//        delay(100);
-//    }
      }
 }
+
 
 void blink() {
             digitalWrite(OHYEAH, HIGH);
             delay(500);
             digitalWrite(OHYEAH, LOW);
 }
+
 
 void motor() {
     digitalWrite(9, HIGH);
@@ -215,27 +214,9 @@ void motor() {
     digitalWrite(9, HIGH);
 }
 
-// Taking care of some special events.
+
 void keypadEvent(KeypadEvent key){
     switch (keypad.getState()){
-//    case PRESSED:
-//        if (key == '#') {
-//            digitalWrite(ledPin,!digitalRead(ledPin));
-//            ledPin_state = digitalRead(ledPin);        // Remember LED state, lit or unlit.
-//        }
-//        break;
-//
-//    case RELEASED:
-//        if (key == '*') {
-//            digitalWrite(ledPin,ledPin_state);    // Restore LED state from before it started blinking.
-//            blink = false;
-//        }
-//        break;
-//
-//    case HOLD:
-//        if (key == '*') {
-//            blink = true;    // Blink the LED when holding the * key.
-//        }
-//        break;
     }
+
 }
